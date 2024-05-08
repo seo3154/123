@@ -29,6 +29,7 @@ class UserServiceSpec {
     fun setup() {
         val username = faker.internet().username()
         val password = faker.internet().password()
+        val address = faker.address().fullAddress()
         randomUser = UserEntity(
             username = username,
             password = password,

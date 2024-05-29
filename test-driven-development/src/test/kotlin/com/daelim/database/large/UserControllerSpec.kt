@@ -31,6 +31,7 @@ class UserControllerSpec @Autowired constructor(
     fun setup() {
         val username = faker.internet().username()
         val password = faker.internet().password()
+        val address = faker.address().fullAddress()
         randomUser = UserEntity(
             username = username,
             password = password,
@@ -42,7 +43,7 @@ class UserControllerSpec @Autowired constructor(
     @DisplayName("회원 가입 api")
     fun `회원 가입 api`() {
         val user = randomUser
-        `when`(userService.registerUser(randomUser.username, randomUser.password)).thenReturn(
+        `when`(userService.registerUser(randomUser.username, randomUser.password, randomUser.address)).thenReturn(
             UserDto( username = user.username )
         )
 

@@ -18,12 +18,15 @@ class UserSpec {
     fun setup() {
         val username = faker.internet().username()
         val password = faker.internet().password()
+        val address = faker.address().fullAddress()
         randomUser = UserEntity(
             username = username,
             password = password,
             address = address
         )
     }
+
+
 
     @Test
     @DisplayName("8~16 자리의 비밀 번호")

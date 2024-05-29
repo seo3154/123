@@ -12,7 +12,7 @@ class UserService(
     private val userRepository: UserRepository,
     private val redisTemplate: StringRedisTemplate // Redis 템플릿 추가
 ) {
-    fun registerUser(username: String, password: String): UserDto {
+    fun registerUser(username: String, password: String, address: String): UserDto {
         userRepository.findByUsername(username)?.let {
             throw IllegalStateException("Username already exists")
         }
@@ -38,11 +38,11 @@ class UserService(
         return sessionId == storedSessionId
     }
 
-    fun registerUser(username: String, password: String, address: String): UserDto {
+    fun registerUser(username: String, password: String, address: Char): UserDto {
         userRepository.findByUsername(username)?.let {
             throw IllegalStateException("Username already exists")
         }
-        val newUser = UserEntity(username = username, password = password, address = address)
+        val newUser = UserEntity(username = username, password = password, address = address.toString())
         return userRepository.save(newUser).let {
             UserDto(username = it.username)
         }

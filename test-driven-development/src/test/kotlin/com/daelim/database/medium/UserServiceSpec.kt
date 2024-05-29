@@ -45,7 +45,7 @@ class UserServiceSpec {
 
         // When
         val exception = assertThrows(IllegalStateException::class.java) {
-            userService.registerUser(randomUser.username, randomUser.password)
+            userService.registerUser(randomUser.username, randomUser.password, randomUser.address)
         }
 
         // Then
@@ -60,7 +60,7 @@ class UserServiceSpec {
         given(userRepository.save(randomUser)).willReturn(randomUser)
 
         // When
-        val savedUser = userService.registerUser(randomUser.username, randomUser.password)
+        val savedUser = userService.registerUser(randomUser.username, randomUser.password, randomUser.address)
 
         // Then
         assertNotNull(savedUser)
